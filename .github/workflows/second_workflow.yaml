@@ -1,0 +1,18 @@
+name: my second workflow
+on:
+  push:
+    branches: main
+  workflow_dispatch:
+jobs:
+  jobname1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: hello world
+        run: echo "Second workflow Hello world"
+        shell: bash
+  jobname2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Second job
+        run: echo "Second workflow hellow world2"
