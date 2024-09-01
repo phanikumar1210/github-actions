@@ -1,22 +1,35 @@
-name: my first workflow
+name: Example Workflow
+
 on:
   workflow_dispatch:
     inputs:
-      name:
-        description: Who to greet
-        default: Welcome
-  push:
-    branches: main
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+      debug_mode:
+        description: 'Enable debug mode'
+        required: false
+        default: 'false'
+      version:
+        description: 'Application version'
+        required: false
+        default: 'latest'
+
 jobs:
-  jobname1:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: hello world
-        run: echo "Hello world ${{ inputs.name }}"
-        shell: bash
-  jobname2:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Second job
-        run: echo "Hello world in job2"
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print inputs
+        run: |
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Debug Mode: ${{ github.event.inputs.debug_mode }}"
+          echo "Version: ${{ github.event.inputs.version }}"
+
+      - name: Deploy
+        run: |
+          # Your deployment logic here
+          echo "Deploying to ${{ github.event.inputs.environment }}"
