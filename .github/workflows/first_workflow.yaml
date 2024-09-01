@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: dev env
-        run: echo "This is environment ${{ env.ENV }}"
+        run: echo "This is environment ${{ vars.ENV }}"
         shell: bash
   
   STG:
@@ -19,5 +19,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: qa env
-        run: echo "This is environment ${{ env.ENV }}"
+        run: echo "This is environment ${{ vars.ENV }}"
         shell: bash
