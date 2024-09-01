@@ -29,7 +29,8 @@ jobs:
           echo "Environment: ${{ github.event.inputs.environment }}"
           echo "Debug Mode: ${{ github.event.inputs.debug_mode }}"
           echo "Version: ${{ github.event.inputs.version }}"
-          echo "${{ env.ENV }}"
+          echo "ENVIRONMENT is ${{ env.ENV }}"
+          echo $printenv
 
       - name: Deploy
         run: |
