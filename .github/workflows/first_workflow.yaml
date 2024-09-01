@@ -1,38 +1,23 @@
-name: Example Workflow
-
+name: Terraform deployment
 on:
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Deployment environment updated workdflow'
-        required: true
-        default: 'staging'
-      debug_mode:
-        description: 'Enable debug mode'
-        required: false
-        default: 'false'
-      version:
-        description: 'Application version'
-        required: false
-        default: 'latest'
-
+  push:
+    branches: main
 jobs:
-  deploy:
-    environment: ${{ github.event.inputs.environment }}
+  DEV:
     runs-on: ubuntu-latest
+    environment: dev
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Print inputs
-        run: |
-          echo "Environment: ${{ github.event.inputs.environment }}"
-          echo "Debug Mode: ${{ github.event.inputs.debug_mode }}"
-          echo "Version: ${{ github.event.inputs.version }}"
-          echo "ENVIRONMENT is ${{ env.ENV }}"
-          echo $printenv
-
-      - name: Deploy
-        run: |
-          # Your deployment logic here
-          echo "Deploying to ${{ github.event.inputs.environment }}"
+      - uses: actions/checkout@v2
+      - name: dev env
+        run: echo "This is environment $ENV"
+        shell: bash
+  
+  STG:
+    runs-on: ubuntu-latest
+    environment: stg
+    needs: DEV
+    steps:
+      - uses: actions/checkout@v2
+      - name: qa env
+        run: echo "This is environment $ENV"
+        shell: bash
