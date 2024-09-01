@@ -1,15 +1,19 @@
 name: my first workflow
 on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: Who to greet
+        default: Welcome
   push:
     branches: main
-  workflow_dispatch:
 jobs:
   jobname1:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: hello world
-        run: echo "Hello world"
+        run: echo "Hello world ${{ github.event.inputs.name }}"
         shell: bash
   jobname2:
     runs-on: ubuntu-latest
