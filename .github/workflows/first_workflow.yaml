@@ -18,6 +18,7 @@ on:
 
 jobs:
   deploy:
+    environment: ${{ github.event.inputs.environment }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -28,6 +29,7 @@ jobs:
           echo "Environment: ${{ github.event.inputs.environment }}"
           echo "Debug Mode: ${{ github.event.inputs.debug_mode }}"
           echo "Version: ${{ github.event.inputs.version }}"
+          echo "${{ env.ENV }}"
 
       - name: Deploy
         run: |
