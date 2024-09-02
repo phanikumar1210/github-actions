@@ -19,5 +19,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: qa env
-        run: echo "This is environment ${{ vars.ENV }}"
+        run: echo "This is environment test ${{ vars.ENV }}"
         shell: bash
