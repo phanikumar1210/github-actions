@@ -4,7 +4,7 @@ on: [push]
 jobs:
   Hello-World-Job:
     runs-on:
-      - codebuild-myProject-${{ github.run_id }}-${{ github.run_attempt }}
+      - codebuild-github-runner-poc-${{ github.run_id }}-${{ github.run_attempt }}
       - image:arm-3.0
       - instance-size:small
     steps:
